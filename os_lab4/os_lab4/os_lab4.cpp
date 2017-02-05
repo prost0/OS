@@ -16,9 +16,9 @@ struct FileMapping {
 };
 
 FileMapping* fileMappingCreate(const char *fname);
-FileMapping* findStingNumberX(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, int stringNumber);
-FileMapping* findPattern(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, char * pattern);
-FileMapping* findPatternNoRegister(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, char * pattern);
+bool findStingNumberX(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, int stringNumber);
+bool findPattern(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, char * pattern);
+bool findPatternNoRegister(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, char * pattern);
 unsigned long  crc(const char *buf, size_t len);
 unsigned long findCRC(FileMapping *fm, DWORD cbView, const unsigned long long fileSize);
 bool record(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, const unsigned long long position, char *text);
@@ -34,16 +34,15 @@ int main() {
 	FileMapping *map = fileMappingCreate(fileName);
 	LARGE_INTEGER file_size = { 0 };
 	::GetFileSizeEx(map->hFile, &file_size);
-	const unsigned long long fileSize = static_cast<unsigned long long>(file_size.QuadPart);
+	unsigned long long fileSize = static_cast<unsigned long long>(file_size.QuadPart);
 	SYSTEM_INFO sysinfo = { 0 };
 	::GetSystemInfo(&sysinfo);
 	DWORD cbView = sysinfo.dwAllocationGranularity;
 	short int choice;
 	unsigned long long strNum, patSize, index;
 	char * pattern = (char *)malloc(1);
-	printf("1 to find string with your number\n 2 to find pattern\n 3 to find pattern not case sensitive\n 4 to find control sum\n 5 to record\n 6 to remove\n - 1 to quit\n");
+	printf("******************************\n 1 to find string with your number\n 2 to find pattern\n 3 to find pattern not case sensitive\n 4 to find control sum\n 5 to record\n 6 to remove\n 7 to change file\n 8 to help - 1 to quit\n******************************\n");
 
-	
 	while (true) {
 		printf("Enter your choice\n");
 		scanf("%d", &choice);
@@ -56,10 +55,12 @@ int main() {
 		case 2:
 			printf("Enter your pattern size\n");
 			scanf("%llu", &patSize);
-			pattern = (char *)realloc(pattern, patSize);
+			pattern = (char *)realloc(pattern, patSize + 1);
 			printf("Enter your pattern\n");
 			scanf("%s", pattern);
-			findPattern(map, cbView, fileSize, pattern);
+			if (!findPattern(map, cbView, fileSize, pattern)) {
+				printf("404 Not found :(\n");
+			}
 			break;
 		case 3:
 			printf("Enter pattern size\n");
@@ -67,7 +68,9 @@ int main() {
 			pattern = (char *)realloc(pattern, patSize);
 			printf("Enter your pattern\n");
 			scanf("%s", pattern);
-			findPatternNoRegister(map, cbView, fileSize, pattern);
+			if (!findPatternNoRegister(map, cbView, fileSize, pattern)) {
+				printf("404 Not found :(((\n");
+			}
 			break;
 		case 4:
 			printf("%u\n", findCRC(map, cbView, fileSize));
@@ -89,6 +92,19 @@ int main() {
 			scanf("%llu", &patSize);
 			remove(map, cbView, fileSize, index, patSize);
 			break;
+		case 7:
+			CloseHandle(map->hFile);
+			CloseHandle(map->hMapping);
+			printf("Enter file name\n");
+			scanf("%s", fileName);
+			map = fileMappingCreate(fileName);
+			file_size = { 0 };
+			::GetFileSizeEx(map->hFile, &file_size);
+			fileSize = static_cast<unsigned long long>(file_size.QuadPart);
+			break;
+		case 8 :
+			printf("1 to find string with your number\n 2 to find pattern\n 3 to find pattern not case sensitive\n 4 to find control sum\n 5 to record\n 6 to remove\n - 1 to quit\n");
+			break;
 		case -1:
 			return 0;
 			break;
@@ -104,7 +120,7 @@ int main() {
 
 bool remove(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, unsigned long long position, unsigned long long qnty)
 {
-	HANDLE hFile = CreateFile(L"tmp.txt", GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);//OPEN_EXISTING
+	HANDLE hFile = CreateFile(L"tmp.txt", GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
 	if (hFile == INVALID_HANDLE_VALUE) {
 		std::cerr << "fileRemove failed\n " << std::endl;
 		return nullptr;
@@ -190,11 +206,10 @@ FileMapping* fileMappingCreate(const char *fname)
 
 	return mapping;
 }
-//C:\Users\prost(polzovatel)\Desktop\2.txt
 
 
 
-FileMapping* findStingNumberX(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, int stringNumber)
+bool findStingNumberX(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, int stringNumber)
 {
 	unsigned long long curNumber = 0;
 	bool find = false;
@@ -203,89 +218,80 @@ FileMapping* findStingNumberX(FileMapping *fm, DWORD cbView, const unsigned long
 	for (unsigned long long offset = 0; offset < fileSize; offset += cbView) {
 		DWORD high = static_cast<DWORD>((offset >> 32) & 0xFFFFFFFFul);
 		DWORD low = static_cast<DWORD>(offset & 0xFFFFFFFFul);
-		// The last view may be shorter.
 		if (offset + cbView > fileSize) {
 			cbView = static_cast<int>(fileSize - offset);
 		}
 		const char *pView = static_cast<const char *>(
 			::MapViewOfFile(fm->hMapping, FILE_MAP_READ, high, low, cbView));
 		if (pView != NULL) {
-			unsigned long long j;
-			for (j = 0; j < cbView && stringNumber > curNumber; ++j) {
+			unsigned long long j = 0;
+			for (; j < cbView && stringNumber > curNumber; ++j) {
 				if (pView[j] == '\n') {
 					curNumber++;
 				}
 			}
-			if (stringNumber <= curNumber) {
+			if (stringNumber == curNumber) {
 				for (; j < cbView; ++j) {
-					if (pView[j] == '\n') {
-						printf("string number %d \n", stringNumber);
-						//std::cout << "   - string number " << stringNumber << "\n";
-						return nullptr;
-					}
 					putchar(pView[j]);
-					//std::cout << pView[j];
+					if (pView[j] == '\n') {
+						return true;
+					}
 				}
 			}
 		}
 	}
-	return nullptr;
+	return false;
 }
 
 
 
-FileMapping* findPattern(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, char * pattern)
+bool findPattern(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, char * pattern)
 {
-	unsigned long long counter = 0, stringCounter = 0;
+	unsigned long long counter = 0, stringCounter = 0, sum = 0;
 	bool find = false;
-	unsigned long long sum = 0;
 	char *sumString = (char *)malloc(1);
 
 	for (unsigned long long offset = 0; offset < fileSize; offset += cbView) {
 
 		DWORD high = static_cast<DWORD>((offset >> 32) & 0xFFFFFFFFul);
 		DWORD low = static_cast<DWORD>(offset & 0xFFFFFFFFul);
-		// The last view may be shorter.
 		if (offset + cbView > fileSize) {
 			cbView = static_cast<int>(fileSize - offset);
 		}
-		const char *pView = static_cast<const char *>(
-			::MapViewOfFile(fm->hMapping, FILE_MAP_READ, high, low, cbView));
-		//std::cout << " cbViev is " << cbView <<"\n";
-		//printf("cbView is %d \n", cbView);
+		const char *pView = static_cast<const char *>(::MapViewOfFile(fm->hMapping, FILE_MAP_READ, high, low, cbView));
 		if (pView != NULL) {
 			sumString = (char *)realloc(sumString, cbView * sizeof(char) * (counter + 1));
 			unsigned long long j, offs = 0, k = 0;;
-			for (j = 0; j < cbView - offs; ++j) {
+			for (j = 0; j < cbView; ++j) {
 
 				sumString[counter  * cbView + k] = pView[j];
 				if (pView[j] == '\n') {
+					//printf("CBView == %lu\n", cbView);
+					//printf("Offs == %llu\n", offs);
+					//printf("Sum Str == %s", sumString);
 					stringCounter++;
 					offs += k;
 					k = 0;
 					counter = 0;
 					char *res = strstr(sumString, pattern);
 					if (res != nullptr) {
-						//printf("%s", sumString);
 						printf("Pattern start on %u string ", stringCounter);
 						printf("on %u symbol\n", res - sumString + 1);
-						//std::cout << stringCounter << di;
-						return nullptr;
+						return true;
 					}
-				}
-				else {
+				} else {
 					k++;
 				}
 			}
 		}
 		counter++;
 	}
-	return nullptr;
+	return false;
 }
 
 
 
-FileMapping* findPatternNoRegister(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, char * pattern)
+bool findPatternNoRegister(FileMapping *fm, DWORD cbView, const unsigned long long fileSize, char * pattern)
 {
 	unsigned long long counter = 0, stringCounter = 0, patternSize = strlen(pattern);
 
@@ -299,18 +305,15 @@ FileMapping* findPatternNoRegister(FileMapping *fm, DWORD cbView, const unsigned
 
 		DWORD high = static_cast<DWORD>((offset >> 32) & 0xFFFFFFFFul);
 		DWORD low = static_cast<DWORD>(offset & 0xFFFFFFFFul);
-		// The last view may be shorter.
 		if (offset + cbView > fileSize) {
 			cbView = static_cast<int>(fileSize - offset);
 		}
 		const char *pView = static_cast<const char *>(
 			::MapViewOfFile(fm->hMapping, FILE_MAP_READ, high, low, cbView));
-		//std::cout << " cbViev is " << cbView <<"\n";
-		//printf("cbView is %d \n", cbView);
 		if (pView != NULL) {
 			sumString = (char *)realloc(sumString, cbView * sizeof(char) * (counter + 1));
 			unsigned long long j, offs = 0, k = 0;;
-			for (j = 0; j < cbView - offs; ++j) {
+			for (j = 0; j < cbView; ++j) {
 
 				sumString[counter  * cbView + k] = tolower(pView[j]);
 				if (pView[j] == '\n') {
@@ -324,7 +327,7 @@ FileMapping* findPatternNoRegister(FileMapping *fm, DWORD cbView, const unsigned
 						printf("Pattern start on %u string ", stringCounter);
 						printf("on %u symbol\n", res - sumString + 1);
 
-						return nullptr;
+						return true;
 					}
 				}
 				else {
@@ -334,10 +337,8 @@ FileMapping* findPatternNoRegister(FileMapping *fm, DWORD cbView, const unsigned
 		}
 		counter++;
 	}
-
-	return nullptr;
+	return false;
 }
-
 
 
 unsigned long findCRC(FileMapping *fm, DWORD cbView, const unsigned long long fileSize)

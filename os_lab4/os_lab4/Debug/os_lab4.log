@@ -1,2 +1,21 @@
-﻿  os_lab4.vcxproj -> C:\Users\prost(polzovatel)\documents\visual studio 2015\Projects\os_lab4\Debug\os_lab4.exe
+﻿  os_lab4.cpp
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(53): warning C4244: аргумент: преобразование "unsigned __int64" в "int", возможна потеря данных
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(58): warning C4244: аргумент: преобразование "unsigned __int64" в "std::size_t", возможна потеря данных
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(68): warning C4244: аргумент: преобразование "unsigned __int64" в "std::size_t", возможна потеря данных
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(81): warning C4244: аргумент: преобразование "unsigned __int64" в "std::size_t", возможна потеря данных
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(48): warning C4477: "scanf": в строке форматирования "%d" требуется аргумент типа "int *", но вариативный аргумент "1" имеет тип "short *"
+  c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(48): note: рекомендуется использовать "%hd" в строке форматирования
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(141): warning C4244: аргумент: преобразование "unsigned __int64" в "DWORD", возможна потеря данных
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(149): warning C4244: аргумент: преобразование "unsigned __int64" в "DWORD", возможна потеря данных
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(263): warning C4244: аргумент: преобразование "unsigned __int64" в "std::size_t", возможна потеря данных
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(278): warning C4477: "printf": в строке форматирования "%u" требуется аргумент типа "unsigned int", но вариативный аргумент "1" имеет тип "unsigned __int64"
+  c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(278): note: рекомендуется использовать "%llu" в строке форматирования
+  c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(278): note: рекомендуется использовать "%I64u" в строке форматирования
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(314): warning C4244: аргумент: преобразование "unsigned __int64" в "std::size_t", возможна потеря данных
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(327): warning C4477: "printf": в строке форматирования "%u" требуется аргумент типа "unsigned int", но вариативный аргумент "1" имеет тип "unsigned __int64"
+  c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(327): note: рекомендуется использовать "%llu" в строке форматирования
+  c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(327): note: рекомендуется использовать "%I64u" в строке форматирования
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(384): warning C4244: аргумент: преобразование "unsigned __int64" в "DWORD", возможна потеря данных
+c:\users\prost(polzovatel)\documents\visual studio 2015\projects\os_lab4\os_lab4\os_lab4.cpp(371): warning C4101: check: неиспользованная локальная переменная
+  os_lab4.vcxproj -> C:\Users\prost(polzovatel)\documents\visual studio 2015\Projects\os_lab4\Debug\os_lab4.exe
   os_lab4.vcxproj -> C:\Users\prost(polzovatel)\documents\visual studio 2015\Projects\os_lab4\Debug\os_lab4.pdb (Full PDB)
