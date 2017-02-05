@@ -1,0 +1,12 @@
+﻿main.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp__zmq_ctx_new в функции _main
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp__zmq_ctx_destroy в функции _main
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp__zmq_msg_init в функции _main
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp__zmq_msg_init_size в функции _main
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp__zmq_msg_send в функции _main
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp__zmq_msg_recv в функции _main
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp__zmq_msg_close в функции _main
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp__zmq_msg_data в функции _main
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp__zmq_socket в функции _main
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp__zmq_close в функции _main
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp__zmq_bind в функции _main
+C:\Users\prost(polzovatel)\documents\visual studio 2015\Projects\os_lab67\Debug\os_lab67.exe : fatal error LNK1120: неразрешенных внешних элементов: 11

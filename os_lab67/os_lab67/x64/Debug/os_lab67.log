@@ -1,0 +1,4 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (klie.vcxproj, os_lab67.vcxproj, server.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  server.c
+  os_lab67.vcxproj -> C:\Users\prost(polzovatel)\documents\visual studio 2015\Projects\os_lab67\x64\Debug\server_bank.exe
+  os_lab67.vcxproj -> C:\Users\prost(polzovatel)\documents\visual studio 2015\Projects\os_lab67\x64\Debug\server_bank.pdb (Partial PDB)
