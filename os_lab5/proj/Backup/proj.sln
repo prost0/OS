@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "proj", "proj.vcproj", "{3AA1A2A4-C2DE-4335-89DC-AA728A4C70A2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F4959990-6E4E-4EE8-9F75-BF8B30FC213F} = {F4959990-6E4E-4EE8-9F75-BF8B30FC213F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll", "..\dll\dll.vcproj", "{F4959990-6E4E-4EE8-9F75-BF8B30FC213F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3AA1A2A4-C2DE-4335-89DC-AA728A4C70A2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3AA1A2A4-C2DE-4335-89DC-AA728A4C70A2}.Debug|Win32.Build.0 = Debug|Win32
+		{3AA1A2A4-C2DE-4335-89DC-AA728A4C70A2}.Release|Win32.ActiveCfg = Release|Win32
+		{3AA1A2A4-C2DE-4335-89DC-AA728A4C70A2}.Release|Win32.Build.0 = Release|Win32
+		{F4959990-6E4E-4EE8-9F75-BF8B30FC213F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F4959990-6E4E-4EE8-9F75-BF8B30FC213F}.Debug|Win32.Build.0 = Debug|Win32
+		{F4959990-6E4E-4EE8-9F75-BF8B30FC213F}.Release|Win32.ActiveCfg = Release|Win32
+		{F4959990-6E4E-4EE8-9F75-BF8B30FC213F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

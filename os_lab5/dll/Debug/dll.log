@@ -1,0 +1,5 @@
+﻿  dll.cpp
+dll.obj : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/SAFESEH"
+     Создается библиотека C:\Users\prost(polzovatel)\Desktop\os5\dll\Debug\dll.lib и объект C:\Users\prost(polzovatel)\Desktop\os5\dll\Debug\dll.exp
+  dll.vcxproj -> C:\Users\prost(polzovatel)\Desktop\os5\dll\Debug\dll.dll
+  dll.vcxproj -> C:\Users\prost(polzovatel)\Desktop\os5\dll\Debug\dll.pdb (Full PDB)

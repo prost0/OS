@@ -1,0 +1,11 @@
+﻿  dll.cpp
+c:\users\prost(polzovatel)\desktop\os5\dll\dll.h(26): warning C4518: __declspec(dllexport): непредвиденный спецификатор класса хранения или типа; пропуск
+c:\users\prost(polzovatel)\desktop\os5\dll\dll.h(26): warning C4502: "linkage specification" требует использования зарезервированного слова "extern" и должен предшествовать любым другим спецификаторам
+     Создается библиотека C:\Users\prost(polzovatel)\Desktop\os5\proj\Release\dll.lib и объект C:\Users\prost(polzovatel)\Desktop\os5\proj\Release\dll.exp
+  Создание кода
+  5 of 14 functions (35.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  dll.vcxproj -> C:\Users\prost(polzovatel)\Desktop\os5\proj\Release\dll.dll
+  dll.vcxproj -> C:\Users\prost(polzovatel)\Desktop\os5\proj\Release\dll.pdb (Full PDB)

@@ -1,0 +1,16 @@
+﻿  main.cpp
+C:\Users\prost(polzovatel)\Desktop\os5\dll\dll.h(26): warning C4518: __declspec(dllexport): непредвиденный спецификатор класса хранения или типа; пропуск
+C:\Users\prost(polzovatel)\Desktop\os5\dll\dll.h(26): warning C4502: "linkage specification" требует использования зарезервированного слова "extern" и должен предшествовать любым другим спецификаторам
+main.cpp(65): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1270): note:  см. объявление "scanf"
+main.cpp(71): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1270): note:  см. объявление "scanf"
+main.cpp(86): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1270): note:  см. объявление "scanf"
+  Создание кода
+  1 of 18 functions ( 5.6%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  proj.vcxproj -> C:\Users\prost(polzovatel)\Desktop\os5\proj\Release\proj.exe
+  proj.vcxproj -> C:\Users\prost(polzovatel)\Desktop\os5\proj\Release\proj.pdb (Full PDB)
